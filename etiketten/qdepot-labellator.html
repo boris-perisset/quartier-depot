@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html>
+    <head>
+        <title>Quartier Depot - QR-Code Etiketten</title>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex" />
+        <script type="text/javascript" src="libraries/jquery.min.js"></script>
+        <script type="text/javascript" src="libraries/qrcode.min.js"></script>
+        <script type="text/javascript" src="libraries/papaparse.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet"> 
+        
+        <script>
+            /* CONFIGURATION */
+
+            /* Names of columns of CSV file (case-sensitive!).
+             * If you change the title of a column (in its first row), adjust the name here.
+             *
+             * Leave fields empty ("" or null) if not available.
+             */
+            csv_column_names = {
+                product_id: "Artikel-ID",
+                product_description: "Produktname",
+                product_price: "Preis",
+                product_price_currency: null,
+                product_producer: "Produzent",
+                product_origin: "Herkunftsort",
+                product_certifications: "Zertifizierung",
+                product_slug: "Slug",
+                generate_label: "Etikettendruck",
+            };
+
+            // Use the value below when a field is not found in a product
+            default_values = {
+                base_url: "https://webshop.quartier-depot.ch/produkt/", // final URL = base_url + product_slug
+                product_description: "",
+                product_price: 0,
+                product_price_currency: "CHF",
+                product_producer: "",
+                product_origin: "",
+                product_certifications: "",
+                generate_label: false,
+            };
+
+            max_lengths = {
+                product_description: 50,
+                product_producer: 20,
+            }
+        </script>
+        <style>
+            /* @page {
+                size: A4;
+                margin: 0;
+            }
+
+            @media print {
+                html, body {
+                    width: 210mm;
+                    height: 297mm;
+                }                
+            } */
+
+
+            body {
+                font-family: "Bowlby One SC";
+                color: #156c6f;
+            }
+
+            table#products {
+                /* border-collapse: collapse; */
+                border-collapse: separate;
+                width: 16cm;
+            }
+
+            tr.product {
+                height: 3cm;
+            }
+
+            td.product_id {
+                font-size: 42px;
+                width: 3cm;
+                font-weight: bold;
+                background-color: #a7ffbf;
+                text-align: center;
+                text-transform: capitalize;
+            }
+
+            td.product_qr {
+                width: 2cm;
+                height: 2cm;
+                padding-right: 1mm;
+            }
+
+            .product_properties {
+                font-family: "Inconsolata", monospace;
+                font-weight: normal;
+                padding-top: 0;
+                padding-bottom: 0;
+                padding-right: 0;
+                padding-left: 2mm;
+            }
+
+            .product_properties table {
+                width: 100%;
+            }
+
+            .product_origin {
+                width: 55%;
+                text-align: right;
+            }
+
+            td.product_description {
+                font-weight: bold;
+                font-size: 1.4em;
+                overflow-wrap: normal;
+            }
+
+            .product_price .product_price_amount {
+                font-size: 1.4em;
+                font-weight: bold;
+                font-family: "Bowlby One SC";
+            }
+
+            .product_qr {
+                /* width: 0.2cm; */
+            }
+
+            .product_price {
+                width: 35%;
+                text-align: right;
+            }
+
+            .product_properties td {
+                /* padding: .2em; */
+                /* border: 1px solid red; */
+            }
+
+            .hide_instr {
+                font-size: small;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="hide_instr">
+            <input type="checkbox" name="hide_instructions" id="hide_instructions"> Hide instructions
+        </p>
+        <div id="instructions">
+            <h2>Instructions</h2>
+
+            <p>This works with any browser, but Chrome has a "print preview" which will make it easiest.</p>
+
+            <p><a href="https://drive.google.com/open?id=1J-QJ88a4H--qII5zqEOgvOg5-rtO8_wG&authuser=boris%40atelier-perisset.ch&usp=drive_fs">Video-guide?</a></p>
+
+            <ol>
+                <li>Open the <a href="https://docs.google.com/spreadsheets/d/1Mazue5zHuqYaF0XKFnnKkjmHNbJrlraw5SF4DMmXPSE/edit?usp=sharing">inventory</a>.</li>
+                <li>Verify that your inventory has these colums: <code id="required_columns"></code>
+                    <ul>
+                        <li>Overall the following colums are recognized from your inventory: <code id="all_columns"></code></li>
+                        <li>If there are more colums, it's no problem.</li>
+                        <li>The order of the columns also does not matter.</li>
+                        <li>Upper/Lowercase does matter! So <code>artikel-ID</code> is different from <code>Artikel-ID</code>. I know, computers...</li>
+                        <li>If column <code id="label_print_col">Etikettendruck</code> exists, then cells marked as <code>1</code> will be included in the output.</li>
+                    </ul>
+                 </li>
+                 <li>Export the file into CSV format:
+                     <ol>
+                         <li>Menu <u>File</u> &rarr; <u>Download</u> &rarr; <u>Comma-separated values</u></li>
+                         <li>Choose whatever name you wish (not important), and save it somewhere.</li>
+                     </ol>
+                </li>
+                <li>Click the button below to load the CSV file into this page.</li>
+                <li>Wait several seconds for all labels to be automatically generated :-)</li>
+                <li>Press <u>Hide instructions</u> to hide extra text before printing (reload to reset).</li>
+                <li>Press <u>File</u> &rarr; <u>Print to PDF</u> or generate a PDF for all labels.
+                    <ol>
+                        <li>Select to print "2 pages per sheet".</li>
+                        <li>In <u>More settings</u> activate option <u>Background graphics</u>, so colors are printed right.</li>
+                        <li>Verify that the labels are ~10cm in length, or 1/3 of the sheet (A4 = 21x30cm)</li>
+                    </ol>
+                </li>
+                <li>Print, cut, trim and glue labels onto the racks.</li>
+            </ol>
+
+            <p>The <a href="mailto:info@quartier-depot.ch">quartier-depot.ch</a> team.</p>
+
+            <hr>
+            
+            <form id="prodloadform" action="#">
+                <label for="file">Select your CSV file here &rarr; </label>
+                <input type="file" id="file-input" value="Select CSV file ..." />
+                <pre id="file-content"></pre>
+            </form>
+
+            <p>Find the generated labels here below: &#8628;</p>
+        </div>
+
+        
+        <table id="products">
+            <thead></thead>
+            <tbody>
+            </tbody>
+        </table>
+
+
+        <script>
+            const required_column_names = ["product_id", "product_slug"]
+
+            function get_product_url(prod_path) {
+                return default_values["base_url"] + prod_path;
+            }
+
+            function attach_qr(product_id, product_slug, parent_el) {
+                console.log("Appending QR for " + product_id);
+                const prod_url = get_product_url(product_slug);
+                console.log("Prod URL: " + prod_url);
+
+                new QRCode(parent_el, {
+                    text: prod_url,
+                    correctLevel: QRCode.CorrectLevel.L,
+                    width: 110,
+                    height: 110,
+                    colorDark: "#156c6f",
+                    colorLight: "#fff"
+                });
+            }
+
+            async function add_product(parent_el, prod_id, description, price_currency, price_amount, producer, labels, origin, slug) {
+                let el = document.createElement('tr');
+                el.id = prod_id;
+                el.classList.add("product");
+                el.innerHTML = `
+                <td class="product_qr"><a target="_blank" href="` + get_product_url(prod_id) + `" class="product_qr_url"></a></td>
+                <td class="product_id">` + prod_id + `</td>
+                <td class="product_properties">
+                    <table>
+                        <tr>
+                            <td class="product_producer">` + producer + `</td>
+                            <td class="product_origin">` + origin + `</td>
+                        </tr>
+                        <tr>
+                            <td class="product_description" colspan="2">` + description + `</td>
+                        </tr>
+                        <tr>
+                            <td class="product_labels">` + labels + `</td>
+                            <td class="product_price"><span class="product_price_currency">` + price_currency + `</span> <span class="product_price_amount">` + price_amount +`</span></td>
+                        </tr>
+                    </table>
+                </td>`;
+                // prod_id
+                parent_el.appendChild(el);
+                attach_qr(prod_id, slug, el.getElementsByClassName("product_qr_url")[0]);
+            }
+
+
+            function capitalizeFirst(s) {
+                return s.charAt(0).toUpperCase() + s.slice(1);
+            }
+
+            function valid_entry(product_entry) {
+                for (const k of required_column_names) {
+                    if (csv_column_names[k] in product_entry) continue;
+                    console.log(`Product misses required key ${k} = ${csv_column_names[k]}:`);
+                    console.log(product_entry);
+                    return false;
+                }
+                return true;
+            }
+
+            function invalid_products(product_info) {
+                let invalid_product_ids = [];
+                for (const product of product_info) {
+                    if (! valid_entry(product)) {
+                        invalid_product_ids.push(product);
+                    }
+                }
+
+                return invalid_product_ids;
+            }
+
+            function print_required(product) {
+                let prod_id = get_info(product, "product_id");
+                let gen_lab = get_info(product, "generate_label");
+                if (gen_lab === false) {
+                    console.log("Skipping product '" + prod_id + "' as it's not marked for printing.");
+                    return false;
+                }
+                if (gen_lab === true) {
+                    return true;
+                }
+
+                gen_lab = gen_lab.trim().toLowerCase();
+                if (gen_lab.length == 0 || (gen_lab.charAt(0) != '1' && gen_lab.charAt(0) != 'y')) {
+                    console.log(`Skipping product ${prod_id} as it's marked as hidden (label '${gen_lab}').`);
+                    return false;
+                }
+                return true;
+            }
+
+            function gen_products(product_info) {
+                const products_table = document.getElementById('products').getElementsByTagName('tbody')[0];
+                let prod_id;
+                let prod_slug;
+                let prod_desc;
+                for (const product of product_info) {
+                    if (! valid_entry(product)) {
+                        console.log("Skipping product missing required fields:");
+                        console.log(product);
+                        continue;
+                    }
+                    if (! print_required(product))
+                        continue;
+                    prod_id = get_info(product, "product_id");
+                    prod_slug = get_info(product, "product_slug");
+                    prod_desc = get_info(product, "product_description");
+                    // remove product ID from description, if any
+                    if (prod_desc.match(String.raw`^[A-Z][0-9]{2}\s`)) {
+                        prod_desc = prod_desc.substring(3);
+                    }
+                    console.log(`Appending ${prod_id} => ${prod_slug}`);
+                    add_product(products_table,
+                        prod_id,
+                        capitalizeFirst(prod_desc),
+                        get_info(product, "product_price_currency"),
+                        get_info(product, "product_price").toUpperCase(),
+                        capitalizeFirst(get_info(product, "product_producer")),
+                        get_info(product, "product_certifications").toUpperCase(),
+                        capitalizeFirst(get_info(product, "product_origin")),
+                        prod_slug);
+                }
+                $('.product_qr').width('2cm');
+                $('.product_qr').height('2cm');
+            }
+
+            function get_info(obj, param) {
+                function trimLen(s) {
+                    const max_length = max_lengths[param];
+                    if (max_length === undefined || typeof max_length != "number" || typeof s != "string" || s.length <= max_length) {
+                        return s;
+                    }
+
+                    let trimmeds = s.substring(0, max_length-1);
+                    console.log(`Trimming '${s}' from ${s.length} to ${max_length} chars => ${trimmeds}`);
+                    return trimmeds;
+                }
+
+                const seek_label = csv_column_names[param];
+                if (seek_label in obj) {
+                    return trimLen(obj[seek_label]);
+                }
+                
+                console.log(`Looking up default for missing ${param}`);
+                if (param in default_values) {
+                    return trimLen(default_values[param]);
+                }
+
+                console.log(`Unkown and undefaulted param requested: ${param}`)
+                console.log(obj)
+
+                return undefined;
+            }
+
+            function parse_products(evt) {
+                let file = evt.target.files[0];
+                if (! file.name.toLowerCase().endsWith(".csv")) {
+                    alert("I need a CSV file (*.csv)! Please follow the instructions on the main page to get it. I will give up here.");
+                    return false;
+                }
+                Papa.parse(file, {
+                    header: true,
+                    complete: function(results, file) {
+                        // console.log(results.meta);
+                        console.log("Done parsing. " + results.data.length + " items.");
+                        //console.log(results.data[0])
+                        const invalid_product_ids = invalid_products(results.data);
+                        if (invalid_product_ids.length > 0) {
+                            //alert("Some products do not contain the required items (" + required_column_names + "). I'll continue anyway, but expect missing data. Product IDs which failed: " + invalid_product_ids.map(x => x.data).join(', '));
+                        }
+                        gen_products(results.data);
+                    },
+                    error: function(error, file) {
+                        alert("Failed to interpret file: " + error);
+                    }
+                });
+                console.log("Started parsing.");
+            }
+
+            function displayContents(contents) {
+                var element = document.getElementById('file-content');
+                element.textContent = contents;
+            }
+
+            function hide_show(element, visible) {
+                if (visible) {
+                    element.style.display = "block";
+                } else {
+                    element.style.display = "none";
+                }
+            }
+
+            function setup() {
+                document.getElementById('file-input').addEventListener('change', parse_products, false);
+
+                document.getElementById("hide_instructions").addEventListener('change', function() {
+                    hide_show(document.getElementById('instructions'), ! this.checked);
+                    hide_show(document.getElementById('hide_instr'), ! this.checked);
+                });
+
+                document.getElementById('required_columns').innerHTML = required_column_names.map(x => csv_column_names[x]).join(" | ");
+                document.getElementById('all_columns').innerHTML = Object.values(csv_column_names).join(" | ");
+                document.getElementById('label_print_col').innerHTML = csv_column_names["generate_label"];
+            }
+            setup();            
+        </script>
+    </body>
+</html>

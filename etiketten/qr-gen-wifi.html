@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html>
+    <head>
+        <title>QRDepo</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="libraries/jquery.min.js"></script>
+        <script type="text/javascript" src="libraries/qrcode.min.js"></script>
+        <script type="text/javascript" src="libraries/papaparse.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet"> 
+        
+    </head>
+    <body>
+        <form action="#">
+            <h2>Network options</h2>
+
+            <div>
+                <label for="network_name">Network name:</label>
+                <input type="text" value="" name="network_name" id="network_name">
+            </div>
+            
+            <div>
+                <label for="network_pass">Password</label>
+                <input type="text" value="" name="network_pass" id="network_pass">
+            </div>
+
+            <div>
+                <label for="network_type">Network type</label>
+                <select name="network_type" id="network_type">
+                    <option value="WPA" selected="selected">WPA</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">Open (no password)</option>
+                </select>
+            </div>
+
+            <hr>
+            <h2>Display options</h2>
+            
+            <div>
+                <label for="color_fg">Foreground color</label>
+                <input type="text" value="#156c6f" name="color_fg" id="color_fg">
+            </div>
+            
+            <div>
+                <label for="color_bg">Background color</label>
+                <input type="text" value="white" name="color_bg" id="color_bg">
+            </div>
+            
+            <div>
+                <label for="size_px">Size (pixel)</label>
+                <input type="text" value="250" name="size_px" id="size_px">
+            </div>
+        </form>
+        
+        <hr>
+        <div id="qrwifi"></div>
+        
+        <hr>
+        Text: <span id="qr_text"></span>
+        
+        <script>
+            var qr_code = new QRCode("qrwifi");
+
+            function get_qr_str(netname, netpass, nettype) {
+                return `WIFI:S:` + netname + `;T:` + nettype + `;P:` + netpass + `;;`;
+            }
+
+            function update_qr() {
+                const netname = document.getElementById('network_name').value;
+                const netpass = document.getElementById('network_pass').value;
+                let nettype = document.getElementById('network_type');
+                nettype = nettype.options[nettype.selectedIndex].value;
+                const color_fg = document.getElementById('color_fg').value;
+                const color_bg = document.getElementById('color_bg').value;
+                const size_px = document.getElementById('size_px').value;
+
+                let qrstr = get_qr_str(netname, netpass, nettype);
+                document.getElementById('qr_text').innerHTML = qrstr;
+
+                let qel = document.getElementById('qrwifi');
+                qel.innerHTML = '';
+                
+                new QRCode(qel, {
+                    text: qrstr,
+                    correctLevel: QRCode.CorrectLevel.L,
+                    height: size_px,
+                    width: size_px,
+                    colorDark: color_fg,
+                    colorLight: color_bg
+                });
+            }
+
+            function setup() {
+                let el;
+                el = document.getElementById("network_name");
+                el.addEventListener("keyup", update_qr, false);
+
+                el = document.getElementById("network_pass");
+                el.addEventListener("keyup", update_qr, false);
+
+                el = document.getElementById("network_type");
+                el.addEventListener("change", update_qr, false);
+
+                el = document.getElementById("color_bg");
+                el.addEventListener("keyup", update_qr, false);
+
+                el = document.getElementById("color_fg");
+                el.addEventListener("keyup", update_qr, false);
+
+                el = document.getElementById("size_px");
+                el.addEventListener("keyup", update_qr, false);
+            }
+            
+            setup();
+        </script>
+    </body>
+</html>
