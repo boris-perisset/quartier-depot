@@ -29,7 +29,7 @@
                 product_certifications: "Zertifizierung",
                 product_slug: "Slug",
                 generate_label: "Etikettendruck",
-                product_freie_zeile: "Freie Zeile",
+                product_freetext: "Freie Zeile",
             };
 
             // Use the value below when a field is not found in a product
@@ -42,7 +42,7 @@
                 product_origin: "",
                 product_certifications: "",
                 generate_label: false,
-                product_freie_zeile: "",
+                product_freetext: "",
             };
 
             max_lengths = {
@@ -268,7 +268,7 @@ font-size: small;
                 });
             }
 
-            async function add_product(parent_el, prod_id, description, price_currency, price_amount, producer, labels, origin, slug, freie_zeile) {
+            async function add_product(parent_el, prod_id, description, price_currency, price_amount, producer, labels, origin, slug, freetext) {
                 let el = document.createElement('div');
                 el.id = prod_id;
                 el.classList.add("product");
@@ -290,7 +290,7 @@ font-size: small;
     <div class="product_properties">
       <div class="product_detail_box">
         <div class="product_description">` + description + `</div>
-        <div class="produc_free_label">` + freie_zeile + `</div>
+        <div class="produc_free_label">` + freetext + `</div>
       </div>
       <div class="product_detail_box">
         <div class="product_producer">` + producer + `</div>
@@ -366,6 +366,8 @@ font-size: small;
                     prod_id = get_info(product, "product_id");
                     prod_slug = get_info(product, "product_slug");
                     prod_desc = get_info(product, "product_description");
+                    prod_desc = get_info(product, "product_freetext");
+
                     // remove product ID from description, if any
                     if (prod_desc.match(String.raw`^[A-Z][0-9]{2}\s`)) {
                         prod_desc = prod_desc.substring(3);
@@ -381,8 +383,8 @@ font-size: small;
                         capitalizeFirst(get_info(product, "product_origin")),
                         prod_slug);
                 }
-                $('.product_qr').width('2cm');
-                $('.product_qr').height('2cm');
+                $('.product_qr').width('6em');
+                $('.product_qr').height('6em');
             }
 
             function get_info(obj, param) {
