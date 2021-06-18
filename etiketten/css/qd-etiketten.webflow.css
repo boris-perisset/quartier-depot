@@ -1,0 +1,213 @@
+body {
+  font-family: 'Bowlby One', sans-serif;
+  color: #156c6f;
+  font-size: 1cm;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 10px;
+  font-family: Inconsolata, monospace;
+  font-size: 0.7em;
+  line-height: 1.6;
+}
+
+ul {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-family: Inconsolata, monospace;
+  font-size: 0.6em;
+}
+
+ol {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-family: Inconsolata, monospace;
+  font-size: 0.6em;
+}
+
+li {
+  margin-bottom: 0.7em;
+  background-color: #fafafa;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.product_qr {
+  width: 3em;
+  height: 3em;
+  padding: 0.15em;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.product_id {
+  padding: 0.2em 0.3em;
+  background-color: #a7ffbf;
+  font-size: 1.5em;
+  line-height: 1;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.product_properties {
+  padding-left: 0.8em;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-family: Inconsolata, monospace;
+  font-size: 0.6em;
+  line-height: 1;
+}
+
+.product {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.product_description {
+  font-family: Inconsolata, monospace;
+  font-size: 1.8em;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.product_id_price_box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.product_price {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+.product_price_currency {
+  margin-right: 0.5em;
+  font-family: Inconsolata, monospace;
+  font-size: 0.6em;
+}
+
+.price_currency {
+  font-family: Inconsolata, monospace;
+}
+
+.product_price_amount {
+  font-size: 0.9em;
+}
+
+.product_detail_box {
+  margin-bottom: 0.5em;
+}
+
+.produc_free_label {
+  display: inline-block;
+  margin-top: 0.5em;
+  padding: 0.05em 0.55em;
+  background-color: #fffb8f;
+}
+
+.product-id-wrap {
+  padding: 0.15em;
+}
+
+.styling {
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+}
+
+.paragraph {
+  font-size: 0.6em;
+}
+
+.how-it-looks {
+  padding-top: 9vw;
+  padding-bottom: 9vw;
+}
+
+.instructions {
+  padding: 1.5em;
+}
+
+.list-item {
+  margin-bottom: 1.3em;
+}
+
+.list-overall {
+  padding: 1.1em;
+}
+
+.sublist-item {
+  margin-bottom: 0.5em;
+  padding: 0.3em 0.7em;
+  background-color: #f1f1f1;
+}
+
+.code {
+  margin-bottom: 1em;
+  font-size: 0.6em;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.form {
+  font-size: 0.6em;
+}
+
+.list {
+  font-family: Inconsolata, monospace;
+}
+
+.list-item-2 {
+  font-size: 1em;
+}
+
+
