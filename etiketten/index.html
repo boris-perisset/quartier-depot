@@ -355,6 +355,7 @@ font-size: small;
                 let prod_id;
                 let prod_slug;
                 let prod_desc;
+                let prod_freetxt;
                 for (const product of product_info) {
                     if (! valid_entry(product)) {
                         console.log("Skipping product missing required fields:");
@@ -366,7 +367,7 @@ font-size: small;
                     prod_id = get_info(product, "product_id");
                     prod_slug = get_info(product, "product_slug");
                     prod_desc = get_info(product, "product_description");
-                    prod_desc = get_info(product, "product_freetext");
+                    prod_freetxt = get_info(product, "product_freetext");
 
                     // remove product ID from description, if any
                     if (prod_desc.match(String.raw`^[A-Z][0-9]{2}\s`)) {
