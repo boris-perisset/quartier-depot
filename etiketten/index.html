@@ -272,7 +272,8 @@ font-size: small;
                 el.id = prod_id;
                 el.classList.add("product");
                 el.innerHTML = `
-                <div class="product">
+                
+                <div id="products" class="product">
     <div class="product_qr">
       <a target="_blank" href="` + get_product_url(prod_id) + `" class="product_qr_url"></a>
     </div>
@@ -296,7 +297,8 @@ font-size: small;
         <div class="product_labels">` + labels + `</div>
       </div>
     </div>
-  </div>`;
+  </div>
+`;
                 // prod_id
                 parent_el.appendChild(el);
                 attach_qr(prod_id, slug, el.getElementsByClassName("product_qr_url")[0]);
