@@ -100,45 +100,71 @@ font-size: 1cm;
         <p id="hide_instr">
             <input type="checkbox" name="hide_instructions" id="hide_instructions"> Hide instructions
         </p>
-        <div id="instructions">
-            <h2>Instructions</h2>
-
-            <p>This works with any browser, but Chrome has a "print preview" which will make it easiest.</p>
-
-            <p><a href="https://www.loom.com/share/47c9afc612e14874ad7b3cc761742f6c">CHeck the Video-guide</a></p>
-
-            <ol>
-                <li>Open the Wordpress Product Page inventory</a>.</li>
-                <li>Verify that your inventory has these colums: <code id="required_columns"></code>
-                    <ul>
-                        <li>Overall the following colums are recognized from your inventory: <code id="all_columns"></code></li>
-                        <li>If there are more colums, it's no problem.</li>
-                        <li>The order of the columns also does not matter.</li>
-                        <li>Upper/Lowercase does matter! So <code>artikel-ID</code> is different from <code>Artikel-ID</code>. I know, computers...</li>
-                        <li>If column <code id="label_print_col">Etikettendruck</code> exists, then cells marked as <code>1</code> will be included in the output.</li>
-                    </ul>
-                 </li>
-                 <li>Export the file into CSV format:
-                     <ol>
-                         <li>Menu <u>File</u> &rarr; <u>Download</u> &rarr; <u>Comma-separated values</u></li>
-                         <li>Choose whatever name you wish (not important), and save it somewhere.</li>
-                     </ol>
-                </li>
-                <li>Click the button below to load the CSV file into this page.</li>
-                <li>Wait several seconds for all labels to be automatically generated :-)</li>
-                <li>Press <u>Hide instructions</u> to hide extra text before printing (reload to reset).</li>
-                <li>Press <u>File</u> &rarr; <u>Print to PDF</u> or generate a PDF for all labels.
-                    <ol>
-                        <li>Select to print "2 pages per sheet".</li>
-                        <li>In <u>More settings</u> activate option <u>Background graphics</u>, so colors are printed right.</li>
-                        <li>Verify that the labels are ~10cm in length, or 1/3 of the sheet (A4 = 21x30cm)</li>
-                    </ol>
-                </li>
-                <li>Print, cut and trim labels onto the racks.</li>
-            </ol>
-
-            <p>The <a href="mailto:info@quartier-depot.ch">quartier-depot.ch</a> team.</p>
-
+       <div class="instructions">
+      <h2>Instructions</h2>
+      <p>This works with any browser, but Chrome has a &quot;print preview&quot; which will make it easiest.</p>
+      <p>
+        <a href="https://www.loom.com/share/47c9afc612e14874ad7b3cc761742f6c">Check the Video-guide</a>
+      </p>
+      <div class="list-overall">
+        <h3>Open the Wordpress Product Page inventory</h3>
+        <div class="list-item">
+          <p>Verify that your inventory has these colums:</p>
+          <div class="code w-embed"><code id="required_columns"></code></div>
+        </div>
+        <div class="sublist-item">
+          <p>Overall the following colums are recognized from your inventory:</p>
+          <div class="code w-embed"><code id="all_columns"></code></div>
+        </div>
+        <div class="sublist-item">
+          <p>If there are more colums, it&#x27;s no problem.</p>
+        </div>
+        <div class="sublist-item">
+          <p>The order of the columns also does not matter.</p>
+        </div>
+        <div class="sublist-item">
+          <p>Upper/Lowercase does matter! So</p>
+          <div class="code w-embed"><code>artikel-ID</code> is different from <code>Artikel-ID</code>. I know, computers...</div>
+        </div>
+        <div class="sublist-item">
+          <p>If column</p>
+          <div class="code w-embed"><code id="label_print_col">Etikettendruck</code> exists, then cells marked as <code>1</code> will be included in the output.</div>
+        </div>
+      </div>
+      <h3>Export the file into CSV format</h3>
+      <div class="list-overall">
+        <h3>Export the file into CSV format</h3>
+        <div class="code w-embed">Menu <u>File</u> &rarr; <u>Download</u> &rarr; <u>Comma-separated values</u></div>
+        <p>Choose whatever name you wish (not important), and save it somewhere.</p>
+        <div class="list-item">
+          <h4>Click the button below to load the CSV file into this page.</h4>
+        </div>
+        <div class="sublist-item">
+          <p>Wait several seconds for all labels to be automatically generated :-)</p>
+        </div>
+        <div class="sublist-item">
+          <p>Press <span class="underline">Hide instructions</span> to hide extra text before printing (reload to reset).</p>
+        </div>
+        <div class="sublist-item">
+          <p>Press <span class="underline">File</span> &amp;rarr; <span class="underline">Print to PDF</span> or generate a PDF for all labels.</p>
+        </div>
+        <div class="sublist-item">
+          <p>Select to print &quot;2 pages per sheet&quot;.</p>
+        </div>
+        <div class="sublist-item">
+          <p>In <span class="underline">More settings</span> activate option <span class="underline">Background graphics</span>, so colors are printed right.</p>
+        </div>
+        <div class="sublist-item">
+          <p>Verify that the labels are ~10cm in length, or 1/3 of the sheet (A4 = 21x30cm)</p>
+        </div>
+        <div class="sublist-item">
+          <p>Print, cut and trim labels onto the racks.</p>
+        </div>
+        <div class="sublist-item">
+          <p>The <a href="mailto:info@quartier-depot.ch">quartier-depot.ch</a> team</p>
+        </div>
+      </div>
+    </div>
             <hr>
 
             <form id="prodloadform" action="#">
