@@ -50,7 +50,14 @@
                 product_producer: 20,
             }
         </script>
+        
+        
+        
         <style>
+            
+ /* Main CSS */
+
+            
             /* @page {
                 size: A4;
                 margin: 0;
@@ -64,30 +71,39 @@
             } */
 
 
-            body {
-                font-family: "Bowlby One SC";
-                color: #156c6f;
-            }
-
             #products {
                 /* border-collapse: collapse; */
                 border-collapse: separate;
             }
+            
+                        
+            .hide_instr {
+                font-size: small;
+            }
 
+            
+/* Webflow CSS > Boris layouted it with webflow and copied code from there */
+            
+body {
+font-family: "Bowlby One SC";
+color: #156c6f;
+font-size: 1cm;
+}
+            
+            
 .product_qr {
-  width: 6em;
-  height: 6em;  
+  width: 3em;
+  height: 3em;
   -webkit-box-flex: 0;
-  -webkit-flex: 0 auto;
-  -ms-flex: 0 auto;
-  flex: 0 auto;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .product_id {
-  width: 4em;
-  padding: 0.6em;
+  padding: 0.2em 0.4em;
   background-color: #a7ffbf;
-  font-size: 2.3em;
+  font-size: 1.7em;
   line-height: 1;
   font-weight: 400;
   text-align: center;
@@ -95,12 +111,13 @@
 }
 
 .product_properties {
-  padding-left: 2em;
+  padding-left: 0.8em;
   -webkit-box-flex: 0;
-  -webkit-flex: 0 auto;
-  -ms-flex: 0 auto;
-  flex: 0 auto;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
   font-family: Inconsolata, monospace;
+  font-size: 0.6em;
 }
 
 .product {
@@ -108,8 +125,8 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 0.9em;
-  padding-bottom: 0.9em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
@@ -118,7 +135,7 @@
 
 .product_description {
   font-family: Inconsolata, monospace;
-  font-size: 30px;
+  font-size: 1.9em;
   font-weight: 700;
 }
 
@@ -137,9 +154,9 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-box-flex: 0;
-  -webkit-flex: 0 auto;
-  -ms-flex: 0 auto;
-  flex: 0 auto;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .product_price {
@@ -156,6 +173,7 @@
 .product_price_currency {
   margin-right: 0.5em;
   font-family: Inconsolata, monospace;
+  font-size: 0.6em;
 }
 
 .price_currency {
@@ -163,7 +181,7 @@
 }
 
 .product_price_amount {
-  font-size: 22px;
+  font-size: 0.9em;
 }
 
 .product_detail_box {
@@ -176,11 +194,9 @@
   padding: 0.05em 0.55em;
   background-color: #fffb8f;
 }
+
             
-            
- .hide_instr {
-font-size: small;
-}
+
 </style>
         
     </head>
