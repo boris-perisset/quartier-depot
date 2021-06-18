@@ -23,6 +23,7 @@ ul {
   margin-top: 0px;
   margin-bottom: 10px;
   padding-left: 40px;
+  font-family: Inconsolata, monospace;
   font-size: 0.6em;
 }
 
@@ -30,6 +31,7 @@ ol {
   margin-top: 0px;
   margin-bottom: 10px;
   padding-left: 40px;
+  font-family: Inconsolata, monospace;
   font-size: 0.6em;
 }
 
@@ -199,4 +201,13 @@ label {
 .form {
   font-size: 0.6em;
 }
+
+.list {
+  font-family: Inconsolata, monospace;
+}
+
+.list-item-2 {
+  font-size: 1em;
+}
+
 
