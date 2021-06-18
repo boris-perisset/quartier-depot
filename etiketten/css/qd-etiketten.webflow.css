@@ -47,8 +47,8 @@ label {
 }
 
 .product_qr {
-  width: 3em;
-  height: 3em;
+  width: 3cm;
+  height: 3cm;
   padding: 0.15em;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
@@ -209,5 +209,3 @@ label {
 .list-item-2 {
   font-size: 1em;
 }
-
-
