@@ -29,6 +29,7 @@
                 product_certifications: "Zertifizierung",
                 product_slug: "Slug",
                 generate_label: "Etikettendruck",
+                product_freie_zeile: "Freie Zeile",
             };
 
             // Use the value below when a field is not found in a product
@@ -41,6 +42,7 @@
                 product_origin: "",
                 product_certifications: "",
                 generate_label: false,
+                product_freie_zeile: "",
             };
 
             max_lengths = {
@@ -137,52 +139,51 @@
   flex: 0 auto;
 }
 
-           .product_description {
-           font-family: Inconsolata, monospace;
-           font-size: 30px;
-           font-weight: 700;
-            }
+.product_description {
+font-family: Inconsolata, monospace;
+font-size: 30px;
+font-weight: 700;
+}
+
+.product_price {
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+}
             
 .price_currency {
 font-family: Inconsolata, monospace;
 }
             
 .product_price_amount {
-  font-size: 22px;
+font-size: 22px;
 }
             
-            .product_qr {
-                /* width: 0.2cm; */
-            }
-
-            .product_price {
-display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-            }
+.product_qr {
+/* width: 0.2cm; */
+}
             
-            .produc_free_label {
+.produc_free_label {
   display: inline-block;
   margin-top: 0.5em;
   padding: 0.05em 0.55em;
   background-color: #fffb8f;
 }
+            
+.product_properties {
+/* padding: .2em; */
+/* border: 1px solid red; */
+}
 
-
-            .product_properties td {
-                /* padding: .2em; */
-                /* border: 1px solid red; */
-            }
-
-            .hide_instr {
-                font-size: small;
-            }
-        </style>
+ .hide_instr {
+font-size: small;
+}
+</style>
+        
     </head>
     <body>
         <p id="hide_instr">
@@ -268,14 +269,14 @@ display: -webkit-box;
                 });
             }
 
-            async function add_product(parent_el, prod_id, description, price_currency, price_amount, producer, labels, origin, slug) {
-                let el = document.createElement('tr');
+            async function add_product(parent_el, prod_id, description, price_currency, price_amount, producer, labels, origin, slug, freie_zeile) {
+                let el = document.createElement('div');
                 el.id = prod_id;
                 el.classList.add("product");
                 el.innerHTML = `
                 <div class="product">
     <div class="product_qr">
-      <a target="_blank" href="` + get_product_url(prod_id) + `" clinlass="product_qr_url"></a>
+      <a target="_blank" href="` + get_product_url(prod_id) + `" class="product_qr_url"></a>
     </div>
     <div class="product_id_price_box">
       <div class="product-id-wrap">
@@ -289,7 +290,7 @@ display: -webkit-box;
     <div class="product_properties">
       <div class="product_detail_box">
         <div class="product_description">` + description + `</div>
-        <div class="produc_free_label">immer Dienstags</div>
+        <div class="produc_free_label">` + freie_zeile + `</div>
       </div>
       <div class="product_detail_box">
         <div class="product_producer">` + producer + `</div>
