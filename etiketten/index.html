@@ -65,69 +65,112 @@
                 color: #156c6f;
             }
 
-            table#products {
+            #products {
                 /* border-collapse: collapse; */
                 border-collapse: separate;
                 width: 16cm;
             }
 
-            tr.product {
+           .product {
                 height: 3cm;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                padding-top: 0.9em;
+                padding-bottom: 0.9em;
+                -webkit-box-align: stretch;
+                -webkit-align-items: stretch;
+                -ms-flex-align: stretch;
+                 align-items: stretch;
             }
 
-            td.product_id {
-                font-size: 42px;
-                width: 3cm;
-                font-weight: bold;
+            .product_id {
+                padding: 0.6em;
                 background-color: #a7ffbf;
+                font-size: 2.3em;
+                line-height: 1;
+                font-weight: 400;
                 text-align: center;
-                text-transform: capitalize;
+                text-transform: uppercase;
             }
 
-            td.product_qr {
+            .product_qr {
+                -webkit-box-flex: 0;
+                -webkit-flex: 0 auto;
+                -ms-flex: 0 auto;
+                flex: 0 auto;
                 width: 2cm;
                 height: 2cm;
                 padding-right: 1mm;
             }
 
             .product_properties {
-                font-family: "Inconsolata", monospace;
-                font-weight: normal;
-                padding-top: 0;
-                padding-bottom: 0;
-                padding-right: 0;
-                padding-left: 2mm;
+                padding-top: 10px;
+                padding-left: 20px;
+                -webkit-box-flex: 0;
+                -webkit-flex: 0 auto;
+                -ms-flex: 0 auto;
+                flex: 0 auto;
+                font-family: Inconsolata, monospace;
             }
 
-            .product_properties table {
-                width: 100%;
-            }
+.product_id_price_box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 auto;
+  -ms-flex: 0 auto;
+  flex: 0 auto;
+}
 
-            .product_origin {
-                width: 55%;
-                text-align: right;
+           .product_description {
+           font-family: Inconsolata, monospace;
+           font-size: 30px;
+           font-weight: 700;
             }
-
-            td.product_description {
-                font-weight: bold;
-                font-size: 1.4em;
-                overflow-wrap: normal;
-            }
-
-            .product_price .product_price_amount {
-                font-size: 1.4em;
-                font-weight: bold;
-                font-family: "Bowlby One SC";
-            }
-
+            
+.price_currency {
+font-family: Inconsolata, monospace;
+}
+            
+.product_price_amount {
+  font-size: 22px;
+}
+            
             .product_qr {
                 /* width: 0.2cm; */
             }
 
             .product_price {
-                width: 35%;
-                text-align: right;
+display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
             }
+            
+            .produc_free_label {
+  display: inline-block;
+  margin-top: 0.5em;
+  padding: 0.05em 0.55em;
+  background-color: #fffb8f;
+}
+
 
             .product_properties td {
                 /* padding: .2em; */
@@ -228,23 +271,31 @@
                 el.id = prod_id;
                 el.classList.add("product");
                 el.innerHTML = `
-                <td class="product_qr"><a target="_blank" href="` + get_product_url(prod_id) + `" class="product_qr_url"></a></td>
-                <td class="product_id">` + prod_id + `</td>
-                <td class="product_properties">
-                    <table>
-                        <tr>
-                            <td class="product_producer">` + producer + `</td>
-                            <td class="product_origin">` + origin + `</td>
-                        </tr>
-                        <tr>
-                            <td class="product_description" colspan="2">` + description + `</td>
-                        </tr>
-                        <tr>
-                            <td class="product_labels">` + labels + `</td>
-                            <td class="product_price"><span class="product_price_currency">` + price_currency + `</span> <span class="product_price_amount">` + price_amount +`</span></td>
-                        </tr>
-                    </table>
-                </td>`;
+                <div class="product">
+    <div class="product_qr">
+      <a target="_blank" href="` + get_product_url(prod_id) + `" clinlass="product_qr_url"></a>
+    </div>
+    <div class="product_id_price_box">
+      <div class="product-id-wrap">
+        <div class="product_id">` + prod_id + `</div>
+      </div>
+      <div class="product_price">
+        <div class="product_price_currency">` + price_currency + `</div>
+        <div class="product_price_amount">` + price_amount +`</div>
+      </div>
+    </div>
+    <div class="product_properties">
+      <div class="product_detail_box">
+        <div class="product_description">` + description + `</div>
+        <div class="produc_free_label">immer Dienstags</div>
+      </div>
+      <div class="product_detail_box">
+        <div class="product_producer">` + producer + `</div>
+        <div class="product_origin">` + origin + `</div>
+        <div class="product_labels">` + labels + `</div>
+      </div>
+    </div>
+  </div>`;
                 // prod_id
                 parent_el.appendChild(el);
                 attach_qr(prod_id, slug, el.getElementsByClassName("product_qr_url")[0]);
