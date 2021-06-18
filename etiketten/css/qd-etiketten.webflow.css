@@ -12,11 +12,30 @@ h2 {
   font-weight: bold;
 }
 
-p, ol, li {
+p {
   margin-bottom: 10px;
   font-family: Inconsolata, monospace;
   font-size: 0.7em;
   line-height: 1.6;
+}
+
+ul {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-size: 0.6em;
+}
+
+ol {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-size: 0.6em;
+}
+
+li {
+  margin-bottom: 0.7em;
+  background-color: #fafafa;
 }
 
 .product_qr {
