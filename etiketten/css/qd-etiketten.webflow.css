@@ -1,3 +1,12 @@
+:root {
+--fontsize-100: 1rem;
+--fontsize-200: 1.6rem;
+--fontsize-300: 1.8rem;
+--fontsize-400: 2rem;
+}
+
+
+
 body {
   font-family: 'Bowlby One', sans-serif;
   color: #156c6f;
@@ -7,49 +16,57 @@ body {
 h2 {
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 32px;
-  line-height: 36px;
+  --fontsize-200: 1.6rem;
+  line-height: 1.2;
   font-weight: bold;
 }
 
 p {
   margin-bottom: 10px;
   font-family: Inconsolata, monospace;
-  font-size: 0.7em;
+  font-size: var(--fontsize-100);
   line-height: 1.6;
 }
 
 ul {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 0.7em;
   padding-left: 40px;
   font-family: Inconsolata, monospace;
-  font-size: 0.6em;
+  font-size: var(--fontsize-100);
 }
 
 ol {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 0.7em;
   padding-left: 40px;
   font-family: Inconsolata, monospace;
-  font-size: 0.6em;
+  font-size: var(--fontsize-100);
 }
 
 li {
-  margin-bottom: 0.7em;
+  margin-bottom: 0.9em;
+  padding: 0.25rem;
   background-color: #fafafa;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
   font-weight: bold;
+  font-size: var(--fontsize-200);
 }
+
+input {
+    font-family: Inconsolata, monospace;
+    font-size: var(--fontsize-100);
+  }
+
 
 .product_qr {
   width: 3cm;
   height: 3cm;
-  padding: 0.15em;
+  padding: 0.15rem;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -57,9 +74,10 @@ label {
 }
 
 .product_id {
-  padding: 0.2em 0.3em;
+  padding: 0.6em 0.2rem;
+  width: 3cm;
   background-color: #a7ffbf;
-  font-size: 1.5em;
+  font-size: var(--fontsize-400);
   line-height: 1;
   font-weight: 400;
   text-align: center;
@@ -67,13 +85,13 @@ label {
 }
 
 .product_properties {
-  padding-left: 0.8em;
+  padding-left: 0.2rem;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   font-family: Inconsolata, monospace;
-  font-size: 0.6em;
+  font-size: var(--fontsize-100);
   line-height: 1;
 }
 
@@ -82,8 +100,8 @@ label {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
@@ -92,7 +110,7 @@ label {
 
 .product_description {
   font-family: Inconsolata, monospace;
-  font-size: 1.8em;
+  font-size: var(--fontsize-300);
   line-height: 1;
   font-weight: 700;
 }
@@ -122,6 +140,10 @@ label {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
   -ms-flex-align: end;
@@ -129,9 +151,9 @@ label {
 }
 
 .product_price_currency {
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
   font-family: Inconsolata, monospace;
-  font-size: 0.6em;
+  font-size: var(--fontsize-100);
 }
 
 .price_currency {
@@ -139,22 +161,25 @@ label {
 }
 
 .product_price_amount {
-  font-size: 0.9em;
+  font-size: var(--fontsize-200);
+  line-height: 1;
 }
 
 .product_detail_box {
-  margin-bottom: 0.5em;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #36a089;
 }
 
 .produc_free_label {
   display: inline-block;
-  margin-top: 0.5em;
-  padding: 0.05em 0.55em;
+  margin-top: 0.5rem;
+  padding: 0.1em 0.1rem;
   background-color: #fffb8f;
 }
 
 .product-id-wrap {
-  padding: 0.15em;
+  padding: 0.15rem;
 }
 
 .styling {
@@ -163,7 +188,7 @@ label {
 }
 
 .paragraph {
-  font-size: 0.6em;
+  font-size: var(--fontsize-100);
 }
 
 .how-it-looks {
@@ -172,40 +197,49 @@ label {
 }
 
 .instructions {
-  padding: 1.5em;
+  padding: 1.5rem;
 }
 
 .list-item {
-  margin-bottom: 1.3em;
+  margin-bottom: 1.3rem;
 }
 
 .list-overall {
-  padding: 1.1em;
+  padding: 1.1rem;
 }
 
 .sublist-item {
-  margin-bottom: 0.5em;
-  padding: 0.3em 0.7em;
+  margin-bottom: 0.5rem;
+  padding: 0.3em 0.7rem;
   background-color: #f1f1f1;
 }
 
 .code {
-  margin-bottom: 1em;
-  font-size: 0.6em;
+  margin-bottom: 1rem;
+  font-size: var(--fontsize-100);
 }
 
 .underline {
   text-decoration: underline;
 }
 
-.form {
-  font-size: 0.6em;
-}
+
 
 .list {
   font-family: Inconsolata, monospace;
 }
 
 .list-item-2 {
-  font-size: 1em;
+  font-size: var(--fontsize-100);
+}
+
+#instructions {
+  padding-left: 4vw;
+  padding-right: 4vw;
+  padding-top: 2vw;
+}
+
+#hide_instr {
+  background-color: #fffb8f;
+  padding: 4vw;
 }
