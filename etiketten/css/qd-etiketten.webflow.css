@@ -1,8 +1,15 @@
 :root {
+/* Default*/
 --fontsize-100: 1rem;
+
+/* Preis */
 --fontsize-200: 1.6rem;
+
+/* Name */
 --fontsize-300: 1.7rem;
---fontsize-400: 2rem;
+
+/* Artikel - ID*/
+--fontsize-400: 2rem; 
 }
 
 
@@ -64,8 +71,8 @@ input {
 
 
 .product_qr {
-  width: 3cm;
-  height: 3cm;
+  width: 1.5cm;
+  height: 1.5cm;
   padding: 0.15rem;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
@@ -75,7 +82,7 @@ input {
 
 .product_id {
   padding: 0.6em 0.2rem;
-  width: 3cm;
+  width: 1.5cm;
   background-color: #a7ffbf;
   font-size: var(--fontsize-400);
   line-height: 1;
@@ -106,6 +113,7 @@ input {
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
+  width: 14cm;
 }
 
 .product_description {
@@ -248,6 +256,7 @@ input {
 
   .product {
       page-break-inside: avoid;
+      page-break-before: auto;
   }
 
 
