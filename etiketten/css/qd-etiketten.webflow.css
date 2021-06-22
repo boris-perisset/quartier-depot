@@ -1,29 +1,29 @@
 :root {
 /* Default*/
---fontsize-100: 1rem;
+--fontsize-100: 0.7rem;
 
 /* Preis */
---fontsize-200: 1.6rem;
+--fontsize-200: 0.8rem;
 
 /* Name */
---fontsize-300: 1.7rem;
+--fontsize-300: 1.0rem;
 
 /* Artikel - ID*/
---fontsize-400: 2rem; 
+--fontsize-400: 1.0rem; 
 }
 
-
+:root {
+}
 
 body {
   font-family: 'Bowlby One', sans-serif;
   color: #156c6f;
-  font-size: 1cm;
 }
 
 h2 {
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: var(--fontsize-200);
+  font-size: var(--fontsize-300);
   line-height: 1.2;
   font-weight: bold;
 }
@@ -40,7 +40,7 @@ ul {
   margin-bottom: 0.7em;
   padding-left: 40px;
   font-family: Inconsolata, monospace;
-  font-size: var(--fontsize-100);
+  font-size: var(--fontsize-300);
 }
 
 ol {
@@ -48,7 +48,7 @@ ol {
   margin-bottom: 0.7em;
   padding-left: 40px;
   font-family: Inconsolata, monospace;
-  font-size: var(--fontsize-100);
+  font-size: var(--fontsize-300);
 }
 
 li {
@@ -61,18 +61,18 @@ label {
   display: block;
   margin-bottom: 1rem;
   font-weight: bold;
-  font-size: var(--fontsize-200);
+  font-size: var(--fontsize-300);
 }
 
 input {
     font-family: Inconsolata, monospace;
-    font-size: var(--fontsize-100);
+    font-size: var(--fontsize-300);
   }
 
 
 .product_qr {
-  width: 3cm;
-  height: 3cm;
+  width: 1.5cm;
+  height: 1.5cm;
   padding: 0.15rem;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
@@ -82,7 +82,7 @@ input {
 
 .product_id {
   padding: 0.6em 0.2rem;
-  width: 3cm;
+  width: 1.5cm;
   background-color: #a7ffbf;
   font-size: var(--fontsize-400);
   line-height: 1;
@@ -107,10 +107,7 @@ input {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-right: 1rem;
-  padding-left: 0.25rem;
+  padding: 2.5mm;
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
@@ -118,7 +115,7 @@ input {
   border-style: solid;
   border-width: 1px;
   border-color: #cccccc;
-  margin-bottom: 1rem;
+  height: 2cm;
 }
 
 .product_description {

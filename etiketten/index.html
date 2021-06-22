@@ -60,7 +60,16 @@
             <input type="checkbox" name="hide_instructions" id="hide_instructions"> Hide instructions
         </p>
         <div id="instructions">
-            <h2>Instructions</h2>
+
+            <form id="prodloadform" action="#">
+                <label for="file">Select your CSV file here &rarr; </label>
+                <input type="file" id="file-input" value="Select CSV file ..." />
+                <pre id="file-content"></pre>
+            </form>
+            
+            <p>Find the generated labels here below: &#8628;</p>
+
+            <h2>Anleitung</h2>
 
             <p>This works with any browser, but Chrome has a "print preview" which will make it easiest.</p>
 
@@ -100,13 +109,8 @@
 
             <hr>
 
-            <form id="prodloadform" action="#">
-                <label for="file">Select your CSV file here &rarr; </label>
-                <input type="file" id="file-input" value="Select CSV file ..." />
-                <pre id="file-content"></pre>
-            </form>
 
-            <p>Find the generated labels here below: &#8628;</p>
+
         </div>
 
 
