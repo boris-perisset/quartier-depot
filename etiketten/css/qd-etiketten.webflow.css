@@ -86,7 +86,7 @@ input {
 .product_qr {
   width: 1.5cm;
   height: 1.5cm;
-  padding: 0.15rem;
+  padding-right: 0.25rem;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -94,7 +94,7 @@ input {
 }
 
 .product_id {
-  padding: 0.6em 0.2rem;
+  padding: 0.4em 0.2rem;
   width: 1.5cm;
   background-color: #a7ffbf;
   font-size: var(--fontsize-400);
@@ -105,7 +105,23 @@ input {
 }
 
 .product_properties {
-  padding-left: 0.2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -113,6 +129,8 @@ input {
   font-family: Inconsolata, monospace;
   font-size: var(--fontsize-100);
   line-height: 1;
+  height: 100%;
+  
 }
 
 
@@ -142,6 +160,7 @@ input {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 100%;
+  padding-right: 0.25rem;
 }
 
 .product_price {
@@ -176,7 +195,6 @@ input {
 
 .product_detail_box {
   padding-top: 0.15rem;
-  margin-bottom: 0.15rem;
   color: #36a089;
 }
 
@@ -187,9 +205,6 @@ input {
   background-color: #fffb8f;
 }
 
-.product-id-wrap {
-  padding: 0.25rem;
-}
 
 .styling {
   padding-top: 10vw;
